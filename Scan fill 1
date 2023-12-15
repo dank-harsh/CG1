@@ -1,0 +1,71 @@
+#include<iostream.h>
+#include<graphics.h>
+#include<conio.h>
+#include<dos.h>
+class draw
+{
+	public:
+	void floodfill_4(int x,int y,int oldcolor,int newcolor)
+	{
+		int current;
+		current=getpixel(x,y);
+		if(current == oldcolor)
+		{
+			putpixel(x,y,newcolor);
+			//delay(10);
+			floodfill_4(x+1,y,oldcolor,newcolor);
+			floodfill_4(x-1,y,oldcolor,newcolor);
+			floodfill_4(x,y+1,oldcolor,newcolor);
+			floodfill_4(x,y-1,oldcolor,newcolor);
+
+		}
+
+	}
+	void floodfill_8(int x,int y,int oldcolor,int newcolor)
+	{
+		int current;
+		current=getpixel(x,y);
+		if(current== oldcolor)
+		{
+			putpixel(x,y,newcolor);
+			//delay(10);
+			floodfill_8(x+1,y,oldcolor,newcolor);
+			floodfill_8(x-1,y,oldcolor,newcolor);
+			floodfill_8(x,y+1,oldcolor,newcolor);
+			floodfill_8(x,y-1,oldcolor,newcolor);
+
+			floodfill_8(x+1,y+1,oldcolor,newcolor);
+			floodfill_8(x-1,y+1,oldcolor,newcolor);
+			floodfill_8(x+1,y-1,oldcolor,newcolor);
+			floodfill_8(x-1,y-1,oldcolor,newcolor);
+
+		}
+
+	}
+
+
+};
+void main()
+{
+
+	int gd=DETECT,gm;
+	int poly[]={50,50,100,50,150,100,50,100,50,50};
+	draw obj;
+	initgraph(&gd,&gm,"C://TURBOC3//BGI");
+	setbkcolor(15);
+	//cout<<"Name: "<<"\n";
+	//cout<<"Roll: "<<"\n";
+	//rectangle(50,50,100,100);
+
+	drawpoly(5,poly);
+
+
+	//rectangle(150,50,200,100);
+	//circle(250,250,50);
+
+
+	obj.floodfill_4(55,55,0,GREEN);
+	//obj.floodfill_8(55,55,0,RED);
+	getch();
+	closegraph();
+}
