@@ -1,0 +1,67 @@
+#include<iostream.h>
+#include<graphics.h>
+#include<conio.h>
+#include<dos.h>
+class draw
+{
+	public:
+	void boundryfill_4(int x,int y,int edgecolor,int newcolor)
+	{
+		int current;
+		current=getpixel(x,y);
+		if(current!= edgecolor && current!=newcolor)
+		{
+			putpixel(x,y,newcolor);
+			//delay(10);
+			boundryfill_4(x+1,y,edgecolor,newcolor);
+			boundryfill_4(x-1,y,edgecolor,newcolor);
+			boundryfill_4(x,y+1,edgecolor,newcolor);
+			boundryfill_4(x,y-1,edgecolor,newcolor);
+
+		}
+
+	}
+	void boundryfill_8(int x,int y,int edgecolor,int newcolor)
+	{
+		int current;
+		current=getpixel(x,y);
+		if(current!= edgecolor && current!=newcolor)
+		{
+			putpixel(x,y,newcolor);
+			//delay(10);
+			boundryfill_8(x+1,y,edgecolor,newcolor);
+			boundryfill_8(x-1,y,edgecolor,newcolor);
+			boundryfill_8(x,y+1,edgecolor,newcolor);
+			boundryfill_8(x,y-1,edgecolor,newcolor);
+
+			boundryfill_8(x+1,y+1,edgecolor,newcolor);
+			boundryfill_8(x-1,y+1,edgecolor,newcolor);
+			boundryfill_8(x+1,y-1,edgecolor,newcolor);
+			boundryfill_8(x-1,y-1,edgecolor,newcolor);
+
+		}
+
+	}
+
+
+};
+void main()
+{
+
+	int gd=DETECT,gm;
+	draw obj;
+	initgraph(&gd,&gm,"C://TURBOC3//BGI");
+	setbkcolor(15);
+	//cout<<"Name: "<<"\n";
+	//cout<<"Roll: "<<"\n";
+	rectangle(50,50,100,100);
+
+
+	rectangle(150,50,200,100);
+
+
+	obj.boundryfill_4(55,55,15,GREEN);
+	obj.boundryfill_8(155,55,15,RED);
+	getch();
+	closegraph();
+}
